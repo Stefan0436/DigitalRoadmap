@@ -281,6 +281,7 @@ public class MainWindow {
 		panel_6.add(btnNewButton, BorderLayout.EAST);
 
 		JButton btnNewButton_2 = new JButton("🗑");
+		btnNewButton_2.setFocusable(false);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (location == TODO) {
