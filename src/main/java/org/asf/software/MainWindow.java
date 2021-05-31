@@ -182,15 +182,15 @@ public class MainWindow {
 		frmDigitalRoadmapV.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 		JPanel panel = new JPanel();
-		JScrollPane scrollPane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		panel.setLayout(new BorderLayout(0, 0));
+		panel_3 = new JPanel();
+		JScrollPane scrollPane = new JScrollPane(panel_3, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		scrollPane.setPreferredSize(new Dimension(350, 10));
-		frmDigitalRoadmapV.getContentPane().add(scrollPane, BorderLayout.WEST);
-		panel.setLayout(new BorderLayout(0, 0));
-		panel_3 = new JPanel();
-		panel.add(panel_3);
-		panel_3.setPreferredSize(new Dimension(scrollPane.getWidth(), panel_3.getPreferredSize().height));
+		panel.add(scrollPane);
+		frmDigitalRoadmapV.getContentPane().add(panel, BorderLayout.WEST);
+		panel_3.setLayout(new WrapLayout(WrapLayout.CENTER, 5, 5));
 
 		JLabel lblNewLabel = new JLabel("To-do");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -204,16 +204,16 @@ public class MainWindow {
 		});
 		panel.add(btnNewButton_3, BorderLayout.SOUTH);
 
-		panel_1 = new JPanel();
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setPreferredSize(new Dimension(350, 10));
-
-		JScrollPane scrollPane_1 = new JScrollPane(panel_1_1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		panel_1_1.setLayout(new BorderLayout(0, 0));
-		panel_1_1.add(panel_1);
-		scrollPane_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setPreferredSize(new Dimension(scrollPane_1.getWidth(), panel_1.getPreferredSize().height));
+
+		panel_1 = new JPanel();
+		JScrollPane scrollPane_1 = new JScrollPane(panel_1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		panel_1.setLayout(new WrapLayout(WrapLayout.CENTER, 5, 5));
+		panel_1_1.add(scrollPane_1);
+		panel_1_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
 		JLabel lblDone = new JLabel("Done");
 		lblDone.setHorizontalAlignment(SwingConstants.CENTER);
@@ -226,23 +226,22 @@ public class MainWindow {
 			}
 		});
 		panel_1_1.add(btnNewButton_4, BorderLayout.SOUTH);
-		frmDigitalRoadmapV.getContentPane().add(scrollPane_1, BorderLayout.EAST);
+		frmDigitalRoadmapV.getContentPane().add(panel_1_1, BorderLayout.EAST);
 
 		JPanel panel_2_1 = new JPanel();
-		JScrollPane scrollPane_2 = new JScrollPane(panel_2_1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_2_1.setPreferredSize(new Dimension(scrollPane_2.getWidth(), panel_2_1.getPreferredSize().height));
+		panel_2_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_2_1.setLayout(new BorderLayout(0, 0));
 
 		panel_2 = new JPanel();
-		panel_2.setPreferredSize(new Dimension(0, 10));
-		panel_2_1.add(panel_2);
+		JScrollPane scrollPane_2 = new JScrollPane(panel_2, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		panel_2.setLayout(new WrapLayout(WrapLayout.CENTER, 5, 5));
+		panel_2_1.add(scrollPane_2);
 
 		JLabel lblInprogress = new JLabel("In-progress");
 		lblInprogress.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2_1.add(lblInprogress, BorderLayout.NORTH);
-		frmDigitalRoadmapV.getContentPane().add(scrollPane_2, BorderLayout.CENTER);
+		frmDigitalRoadmapV.getContentPane().add(panel_2_1, BorderLayout.CENTER);
 
 		frmDigitalRoadmapV.setLocationRelativeTo(null);
 	}
@@ -321,8 +320,7 @@ public class MainWindow {
 					add(textArea.getText(), IN_PROGRESS);
 					panel_3.updateUI();
 				}
-				frmDigitalRoadmapV.invalidate();
-				frmDigitalRoadmapV.validate();
+				frmDigitalRoadmapV.repaint();
 			}
 		});
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -335,8 +333,7 @@ public class MainWindow {
 					add(textArea.getText(), IN_PROGRESS);
 					panel_1.updateUI();
 				}
-				frmDigitalRoadmapV.invalidate();
-				frmDigitalRoadmapV.validate();
+				frmDigitalRoadmapV.repaint();
 			}
 		});
 
