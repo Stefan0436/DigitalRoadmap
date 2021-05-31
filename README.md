@@ -19,7 +19,7 @@ For Windows:
 
 Both Windows and Linux output in `build/libs`, the `all` jar is runnable.
 
-# Installing into Linux
+# Installing into a Linux desktop environment
 On linux, you can install the program to the application menu (and associate the drf extension) by using the following commands:
 
 ```bash
