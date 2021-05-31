@@ -1,6 +1,7 @@
 # DigitalRoadmap 
 DigitalRoadmap is a simple java program for project roadmaps, inspired by Scrum.
 
+<br/>
 
 # Building
 You can build the project by using the following commands depending on your operating system.
@@ -20,6 +21,7 @@ For Windows:
 
 Both Windows and Linux output in `build/libs`, the `all` jar is runnable.
 
+<br/>
 
 # Installing into a Linux desktop environment
 On linux, you can install the program to the application menu (and associate the drf extension) by using the following commands:
