@@ -1,7 +1,9 @@
 [Desktop Entry]
 Type=Application
+Comment[en_US]=Simple roadmapping program for development
+Comment=Simple roadmapping program for development
+Icon=accessories-text-editor
 Name=AerialWorks Digital Roadmap
-MimeType=application/x-digitalroadmap;
-Exec=java -jar /usr/lib/digitalroadmap.jar "%f"
-NoDisplay=true
+Exec=java -jar /usr/lib/digitalroadmap.jar
+Categories=Utility;Development;
 StartupNotify=true

@@ -167,12 +167,12 @@ public class MainWindow {
 			public void windowClosing(WindowEvent arg0) {
 				try {
 					write();
-					frmDigitalRoadmapV.dispose();
+					System.exit(0);
 				} catch (IOException e) {
 					if (JOptionPane.showConfirmDialog(frmDigitalRoadmapV,
 							"Error occured while writing file:\n" + e + "\n\nDo you want to cancel?", "Write Error",
 							JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) != JOptionPane.YES_OPTION) {
-						frmDigitalRoadmapV.dispose();
+						System.exit(0);
 					}
 				}
 			}
