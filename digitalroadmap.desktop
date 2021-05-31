@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=AerialWorks Digital Roadmap
+MimeType=application/x-digitalroadmap;
+Exec=java -jar /usr/lib/digitalroadmap.jar "%f"
+NoDisplay=true
+StartupNotify=true
