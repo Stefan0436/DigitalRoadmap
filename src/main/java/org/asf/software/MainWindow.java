@@ -136,7 +136,7 @@ public class MainWindow {
 			}
 
 			System.out.println("Are you sure you want to install this program?");
-			System.out.println("Installing will add .rmf and rmf to the HKEY_CLASSES_ROOT registry key.");
+			System.out.println("Installing will add .drf and drf to the HKEY_CLASSES_ROOT registry key.");
 			System.out.println(
 					"In order to uninstall, you will need to delete both keys and the default destop shortcut.");
 			System.out.print("Continue? [Y/n] ");
