@@ -205,10 +205,9 @@ public class MainWindow {
 				if (!linkscript.exists()) {
 					InputStream strm = MainWindow.class.getClassLoader().getResourceAsStream("link.vbs");
 					String cont = new String(strm.readAllBytes()).replace("%exec%", destination.getCanonicalPath())
-							.replace("%java%",
-									ProcessHandle.current().info().command().get()
-											.replace("%link1%", desktopLink.getCanonicalPath())
-											.replace("%link2%", desktopLink2.getCanonicalPath()));
+							.replace("%java%", ProcessHandle.current().info().command().get())
+							.replace("%link1%", desktopLink.getCanonicalPath())
+							.replace("%link2%", desktopLink2.getCanonicalPath());
 					Files.writeString(linkscript.toPath(), cont);
 					strm.close();
 				}
