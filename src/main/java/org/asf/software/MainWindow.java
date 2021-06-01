@@ -171,7 +171,8 @@ public class MainWindow {
 					InputStream strm = MainWindow.class.getClassLoader().getResourceAsStream("digitalroadmap.reg");
 					String cont = new String(strm.readAllBytes())
 							.replace("%exec%", destination.getCanonicalPath().replace("\\", "\\\\"))
-							.replace("%java%", ProcessHandle.current().info().command().get().replace("\\", "\\\\"));
+							.replace("%java%", ProcessHandle.current().info().command().get().replace("\\", "\\\\")
+									.replace("\r", "").replace("\n", "\r\n"));
 					Files.writeString(reg.toPath(), cont);
 					strm.close();
 				}
