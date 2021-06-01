@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -115,7 +118,77 @@ public class MainWindow {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		if (args.length == 1 && args[0].equals("@install-windows")) {
+			System.out.println("Preparing to install...");
+			File programFiles = new File("/Program Files (x86)");
+			if (!programFiles.exists()) {
+				programFiles = new File("/Program Files");
+			}
+			if (!programFiles.exists() || !new File("/Windows/System32/reg.exe").exists()) {
+				System.out.println(
+						"Cannot install in non-windows systems using this method, please see our git repository.");
+				System.exit(1);
+			}
+			if (!programFiles.canWrite()) {
+				System.out.println("Cannot install without administrator rights.");
+				System.exit(1);
+			}
+
+			System.out.println("Are you sure you want to install this program?");
+			System.out.println("Installing will add .rmf and rmf to the HKEY_CLASSES_ROOT registry key.");
+			System.out.println(
+					"In order to uninstall, you will need to delete both keys and the default destop shortcut.");
+			System.out.print("Continue? [Y/n] ");
+
+			char ch = (char) System.in.read();
+			File destination = new File(programFiles, "DigitalRoadmap");
+			destination.mkdirs();
+			if (!destination.exists()) {
+				System.out.println("Cannot install without administrator rights.");
+				System.exit(1);
+			}
+
+			if (ch == 'Y' || ch == 'y') {
+				System.out.println("Installing jar file...");
+				File outp = new File(destination, "digitalroadmap.jar");
+
+				if (outp.exists())
+					outp.delete();
+				if (!outp.getParentFile().exists())
+					outp.getParentFile().mkdirs();
+
+				try {
+					Files.copy(new File(MainWindow.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+							.toPath(), outp.toPath());
+				} catch (IOException | URISyntaxException e) {
+					throw new IOException(e);
+				}
+
+				File reg = new File(destination, "digitalroadmap.reg");
+				if (!reg.exists()) {
+					InputStream strm = MainWindow.class.getClassLoader().getResourceAsStream("digitalroadmap.reg");
+					String cont = new String(strm.readAllBytes())
+							.replace("%exec%", destination.getCanonicalPath().replace("\\", "\\\\"))
+							.replace("%java%", ProcessHandle.current().info().command().get().replace("\\", "\\\\"));
+					Files.writeString(reg.toPath(), cont);
+					strm.close();
+				}
+
+				System.out.println("Installing registry entries...");
+				ProcessBuilder builder = new ProcessBuilder();
+				builder.command("reg", "import", reg.getCanonicalPath());
+				Process proc = builder.start();
+				try {
+					proc.waitFor();
+				} catch (InterruptedException e) {
+				}
+
+				if (proc.exitValue() != 0)
+					throw new IOException("Registry command exited with non-zero exit code");
+			}
+			return;
+		}
 		final File output;
 		if (args.length == 1) {
 			output = new File(args[0]);

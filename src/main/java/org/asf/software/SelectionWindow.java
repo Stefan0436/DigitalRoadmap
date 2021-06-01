@@ -53,7 +53,7 @@ public class SelectionWindow extends JFrame {
 		setResizable(false);
 		setTitle("Open roadmap file...");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 262, 116);
+		setBounds(100, 100, 228, 116);
 		this.addWindowListener(new WindowAdapter() {
 
 			@Override
