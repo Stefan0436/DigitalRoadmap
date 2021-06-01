@@ -1,7 +1,7 @@
 Windows Registry Editor Version 5.00
 
-[HKEY_CLASSES_ROOT\.rmf]
-@="rmf"  
+[HKEY_CLASSES_ROOT\.drf]
+@="drf"  
 
-[HKEY_CLASSES_ROOT\rmf\shell\open\command]
+[HKEY_CLASSES_ROOT\drf\shell\open\command]
 @="\"%java%\" -jar \"%exec%\" \"%1\""
