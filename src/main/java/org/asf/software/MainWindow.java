@@ -142,14 +142,14 @@ public class MainWindow {
 			System.out.print("Continue? [Y/n] ");
 
 			char ch = (char) System.in.read();
-			File destination = new File(programFiles, "DigitalRoadmap");
-			destination.mkdirs();
-			if (!destination.exists()) {
-				System.out.println("Cannot install without administrator rights.");
-				System.exit(1);
-			}
-
 			if (ch == 'Y' || ch == 'y') {
+				File destination = new File(programFiles, "DigitalRoadmap");
+				destination.mkdirs();
+				if (!destination.exists()) {
+					System.out.println("Cannot install without administrator rights.");
+					System.exit(1);
+				}
+
 				System.out.println("Installing jar file...");
 				File outp = new File(destination, "digitalroadmap.jar");
 
@@ -166,6 +166,7 @@ public class MainWindow {
 				}
 
 				File reg = new File(destination, "digitalroadmap.reg");
+				File linkscript = new File(destination, "createlink.vbs");
 				if (!reg.exists()) {
 					InputStream strm = MainWindow.class.getClassLoader().getResourceAsStream("digitalroadmap.reg");
 					String cont = new String(strm.readAllBytes())
@@ -179,6 +180,39 @@ public class MainWindow {
 				ProcessBuilder builder = new ProcessBuilder();
 				builder.command("reg", "import", reg.getCanonicalPath());
 				Process proc = builder.start();
+				try {
+					proc.waitFor();
+				} catch (InterruptedException e) {
+				}
+
+				if (proc.exitValue() != 0)
+					throw new IOException("Registry command exited with non-zero exit code");
+
+				File desktopLink = new File("/Users/Public/Desktop/Digital Roadmap.lnk");
+				if (desktopLink.exists())
+					desktopLink.delete();
+				if (!desktopLink.getParentFile().exists())
+					desktopLink.getParentFile().mkdirs();
+
+				File desktopLink2 = new File("/ProgramData/Start Menu/Programs/Accessories/Digital Roadmap.lnk");
+				if (desktopLink2.exists())
+					desktopLink2.delete();
+				if (!desktopLink2.getParentFile().exists())
+					desktopLink2.getParentFile().mkdirs();
+
+				if (!linkscript.exists()) {
+					InputStream strm = MainWindow.class.getClassLoader().getResourceAsStream("link.vbs");
+					String cont = new String(strm.readAllBytes()).replace("%exec%", destination.getCanonicalPath())
+							.replace("%java%",
+									ProcessHandle.current().info().command().get()
+											.replace("%link1%", desktopLink.getCanonicalPath())
+											.replace("%link2%", desktopLink2.getCanonicalPath()));
+					Files.writeString(reg.toPath(), cont);
+					strm.close();
+				}
+				builder = new ProcessBuilder();
+				builder.command("cscript", linkscript.getCanonicalPath());
+				proc = builder.start();
 				try {
 					proc.waitFor();
 				} catch (InterruptedException e) {
