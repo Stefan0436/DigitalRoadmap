@@ -170,9 +170,11 @@ public class MainWindow {
 				if (!reg.exists()) {
 					InputStream strm = MainWindow.class.getClassLoader().getResourceAsStream("digitalroadmap.reg");
 					String cont = new String(strm.readAllBytes())
-							.replace("%exec%", outp.getCanonicalPath().replace("\\", "\\\\"))
-							.replace("%java%", ProcessHandle.current().info().command().get().replace("\\", "\\\\")
-									.replace("\r", "").replace("\n", "\r\n"));
+							.replace("%exec%",
+									outp.getCanonicalPath().replace("\\", "\\\\").replace("java.exe", "javaw.exe"))
+							.replace("%java%",
+									ProcessHandle.current().info().command().get().replace("java.exe", "javaw.exe")
+											.replace("\\", "\\\\").replace("\r", "").replace("\n", "\r\n"));
 					Files.writeString(reg.toPath(), cont);
 					strm.close();
 				}
@@ -205,7 +207,8 @@ public class MainWindow {
 				if (!linkscript.exists()) {
 					InputStream strm = MainWindow.class.getClassLoader().getResourceAsStream("link.vbs");
 					String cont = new String(strm.readAllBytes()).replace("%exec%", outp.getCanonicalPath())
-							.replace("%java%", ProcessHandle.current().info().command().get())
+							.replace("%java%",
+									ProcessHandle.current().info().command().get().replace("java.exe", "javaw.exe"))
 							.replace("%link1%", desktopLink.getCanonicalPath())
 							.replace("%link2%", desktopLink2.getCanonicalPath());
 					Files.writeString(linkscript.toPath(), cont);
