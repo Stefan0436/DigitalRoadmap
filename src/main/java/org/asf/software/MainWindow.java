@@ -30,6 +30,7 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.SwingConstants;
+import javax.swing.ScrollPaneConstants;
 
 public class MainWindow {
 
@@ -184,7 +185,7 @@ public class MainWindow {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout(0, 0));
 		panel_3 = new JPanel();
-		JScrollPane scrollPane = new JScrollPane(panel_3, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane scrollPane = new JScrollPane(panel_3, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		scrollPane.setPreferredSize(new Dimension(350, 10));
@@ -209,7 +210,7 @@ public class MainWindow {
 		panel_1_1.setLayout(new BorderLayout(0, 0));
 
 		panel_1 = new JPanel();
-		JScrollPane scrollPane_1 = new JScrollPane(panel_1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane scrollPane_1 = new JScrollPane(panel_1, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		panel_1.setLayout(new WrapLayout(WrapLayout.CENTER, 5, 5));
 		panel_1_1.add(scrollPane_1);
@@ -233,7 +234,7 @@ public class MainWindow {
 		panel_2_1.setLayout(new BorderLayout(0, 0));
 
 		panel_2 = new JPanel();
-		JScrollPane scrollPane_2 = new JScrollPane(panel_2, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane scrollPane_2 = new JScrollPane(panel_2, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		panel_2.setLayout(new WrapLayout(WrapLayout.CENTER, 5, 5));
 		panel_2_1.add(scrollPane_2);
@@ -262,7 +263,7 @@ public class MainWindow {
 	private void add(String message, int location) {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_4.setPreferredSize(new Dimension(340, 200));
+		panel_4.setPreferredSize(new Dimension(310, 200));
 		panel_4.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
@@ -280,7 +281,7 @@ public class MainWindow {
 		JButton btnNewButton = new JButton(">");
 		panel_6.add(btnNewButton, BorderLayout.EAST);
 
-		JButton btnNewButton_2 = new JButton("🗑");
+		JButton btnNewButton_2 = new JButton("Delete");
 		btnNewButton_2.setFocusable(false);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
