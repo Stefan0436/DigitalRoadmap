@@ -209,7 +209,7 @@ public class MainWindow {
 									ProcessHandle.current().info().command().get()
 											.replace("%link1%", desktopLink.getCanonicalPath())
 											.replace("%link2%", desktopLink2.getCanonicalPath()));
-					Files.writeString(reg.toPath(), cont);
+					Files.writeString(linkscript.toPath(), cont);
 					strm.close();
 				}
 				builder = new ProcessBuilder();
