@@ -178,6 +178,7 @@ public class MainWindow {
 
 				System.out.println("Installing registry entries...");
 				ProcessBuilder builder = new ProcessBuilder();
+				builder.inheritIO();
 				builder.command("reg", "import", reg.getCanonicalPath());
 				Process proc = builder.start();
 				try {
@@ -212,6 +213,7 @@ public class MainWindow {
 				}
 				builder = new ProcessBuilder();
 				builder.command("cscript", linkscript.getCanonicalPath());
+				builder.inheritIO();
 				proc = builder.start();
 				try {
 					proc.waitFor();
@@ -219,7 +221,7 @@ public class MainWindow {
 				}
 
 				if (proc.exitValue() != 0)
-					throw new IOException("Registry command exited with non-zero exit code");
+					throw new IOException("Link creation command exited with non-zero exit code");
 			}
 			return;
 		}
