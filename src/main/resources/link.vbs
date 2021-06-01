@@ -7,7 +7,7 @@ Set oLink = oWS.CreateShortcut(sLinkFile)
  '  oLink.IconLocation = ""
 oLink.Save
 
-sLinkFile = "%link2"
+sLinkFile = "%link2%"
 Set oLink = oWS.CreateShortcut(sLinkFile)
     oLink.TargetPath = "%java%"
 	oLink.Arguments = "-jar " & chr(34) & "%exec%" & chr(34)

@@ -170,7 +170,7 @@ public class MainWindow {
 				if (!reg.exists()) {
 					InputStream strm = MainWindow.class.getClassLoader().getResourceAsStream("digitalroadmap.reg");
 					String cont = new String(strm.readAllBytes())
-							.replace("%exec%", destination.getCanonicalPath().replace("\\", "\\\\"))
+							.replace("%exec%", outp.getCanonicalPath().replace("\\", "\\\\"))
 							.replace("%java%", ProcessHandle.current().info().command().get().replace("\\", "\\\\")
 									.replace("\r", "").replace("\n", "\r\n"));
 					Files.writeString(reg.toPath(), cont);
@@ -204,7 +204,7 @@ public class MainWindow {
 
 				if (!linkscript.exists()) {
 					InputStream strm = MainWindow.class.getClassLoader().getResourceAsStream("link.vbs");
-					String cont = new String(strm.readAllBytes()).replace("%exec%", destination.getCanonicalPath())
+					String cont = new String(strm.readAllBytes()).replace("%exec%", outp.getCanonicalPath())
 							.replace("%java%", ProcessHandle.current().info().command().get())
 							.replace("%link1%", desktopLink.getCanonicalPath())
 							.replace("%link2%", desktopLink2.getCanonicalPath());
